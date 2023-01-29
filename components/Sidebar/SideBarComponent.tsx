@@ -17,7 +17,9 @@ import {
   useTheme,
 } from '@mui/material'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React, { useState } from 'react'
+import { SideBarItem } from './SideBarItem'
 
 type ExtraProps = {
   isOpen: boolean
@@ -57,8 +59,10 @@ type sideBarProp = {
 }
 
 const SideBarComponent: React.FunctionComponent<sideBarProp> = ({ open }) => {
-  const [selectedIndex, setSelectedIndex] = useState(1)
-  const [menuIndex, setMenuIndex] = useState(1)
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [menuIndex, setMenuIndex] = useState(0)
+
+  const router = useRouter()
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -73,30 +77,15 @@ const SideBarComponent: React.FunctionComponent<sideBarProp> = ({ open }) => {
       <Box>
         <List>
           {menu.map((menuItem, index) => (
-            <ListItem
+            <SideBarItem
               key={`sideBarItem${index}`}
-              disablePadding
-              sx={{ display: 'block' }}
-            >
-              <Link href={menuItem.href} style={{ textDecoration: 'none' }}>
-                <ListItemButton
-                  selected={selectedIndex === index}
-                  onClick={(event) => handleListItemClick(event, index)}
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                  }}
-                >
-                  <ListIcon isOpen={open}>{menuItem.icon}</ListIcon>
-                  <ListItemText
-                    primary={menuItem.title}
-                    sx={{ opacity: open ? 1 : 0 }}
-                    style={{ color: 'rgba(0, 0, 0, 0.87)' }}
-                  />
-                </ListItemButton>
-              </Link>
-            </ListItem>
+              href={menuItem.href}
+              title={menuItem.title}
+              selected={menuItem.href === router.pathname}
+              icon={menuItem.icon}
+              open={open}
+              onClick={(event) => handleListItemClick(event, menuIndex)}
+            />
           ))}
         </List>
       </Box>
@@ -104,38 +93,15 @@ const SideBarComponent: React.FunctionComponent<sideBarProp> = ({ open }) => {
       <Box style={{ marginTop: '1rem' }}>
         <List>
           {footerMenu.map((menuItem, index) => (
-            <ListItem
+            <SideBarItem
               key={`sideBarItem${index}`}
-              disablePadding
-              sx={{ display: 'block' }}
-            >
-              <Link href={menuItem.href} style={{ textDecoration: 'none' }}>
-                <ListItemButton
-                  selected={selectedIndex === menuIndex}
-                  onClick={(event) => handleListItemClick(event, menuIndex)}
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    {menuItem.icon}
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={menuItem.title}
-                    sx={{ opacity: open ? 1 : 0 }}
-                    style={{ color: 'rgba(0, 0, 0, 0.87)' }}
-                  />
-                </ListItemButton>
-              </Link>
-            </ListItem>
+              href={menuItem.href}
+              title={menuItem.title}
+              selected={menuItem.href === router.pathname}
+              icon={menuItem.icon}
+              open={open}
+              onClick={(event) => handleListItemClick(event, menuIndex)}
+            />
           ))}
         </List>
       </Box>

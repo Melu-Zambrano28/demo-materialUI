@@ -10,9 +10,9 @@ type SideBarItemProp = {
   href: string
   title: string
   icon?: JSX.Element
-  onClickFn?: React.MouseEventHandler<HTMLDivElement> | undefined
+  onClick?: React.MouseEventHandler<HTMLDivElement> | undefined
   selected: boolean
-  open?: boolean
+  open: boolean
 }
 
 const SideBarItem: React.FunctionComponent<SideBarItemProp> = ({
@@ -20,7 +20,7 @@ const SideBarItem: React.FunctionComponent<SideBarItemProp> = ({
   title,
   icon,
   selected,
-  onClickFn,
+  onClick,
   open,
 }) => {
   return (
@@ -28,7 +28,7 @@ const SideBarItem: React.FunctionComponent<SideBarItemProp> = ({
       <Link href={href} style={{ textDecoration: 'none' }}>
         <ListItemButton
           selected={selected}
-          onClick={onClickFn}
+          onClick={onClick}
           sx={{
             minHeight: 48,
             justifyContent: open ? 'initial' : 'center',
