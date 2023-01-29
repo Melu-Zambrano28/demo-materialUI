@@ -11,10 +11,10 @@ import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 
 import {
-  AiOutlineDoubleLeft,
-  AiOutlineDoubleRight,
-  AiOutlineMenu,
-} from 'react-icons/ai'
+  KeyboardDoubleArrowLeft,
+  KeyboardDoubleArrowRight,
+  Menu,
+} from '@mui/icons-material'
 
 const drawerWidth = 240
 
@@ -115,7 +115,7 @@ const AppLayoutComponent: React.FC<React.PropsWithChildren<{}>> = ({
               ...(open && { display: 'none' }),
             }}
           >
-            <AiOutlineMenu />
+            <Menu />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
             Mini variant drawer
@@ -126,9 +126,9 @@ const AppLayoutComponent: React.FC<React.PropsWithChildren<{}>> = ({
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? (
-              <AiOutlineDoubleRight />
+              <KeyboardDoubleArrowRight />
             ) : (
-              <AiOutlineDoubleLeft />
+              <KeyboardDoubleArrowLeft />
             )}
           </IconButton>
         </DrawerHeader>

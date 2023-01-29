@@ -1,7 +1,9 @@
-import { IoSettingsSharp } from 'react-icons/io5'
-import { AiTwotoneFolderOpen } from 'react-icons/ai'
-import { TfiAgenda } from 'react-icons/tfi'
-
+import {
+  BusinessCenter,
+  EventNote,
+  FolderOpen,
+  SettingsSuggest,
+} from '@mui/icons-material'
 import {
   Box,
   Divider,
@@ -11,23 +13,34 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  styled,
   useTheme,
 } from '@mui/material'
 import Link from 'next/link'
-import { IconContext } from 'react-icons'
 import React, { useState } from 'react'
 
+type ExtraProps = {
+  isOpen: boolean
+}
+
+const ListIcon = styled(ListItemIcon)<ExtraProps>(({ isOpen, theme }) => ({
+  /*color: theme.palette.error.main,*/
+  minWidth: 0,
+  marginRight: isOpen ? '24px' : 'auto',
+  justifyContent: 'center',
+}))
+
 const menu = [
-  { href: '/prodotti', title: 'Prodotti', icon: <IoSettingsSharp /> },
+  { href: '/prodotti', title: 'Prodotti', icon: <BusinessCenter /> },
   {
     href: '/agenda',
     title: 'Agenda',
-    icon: <TfiAgenda />,
+    icon: <EventNote />,
   },
   {
     href: '/documentazione',
     title: 'Documentazione',
-    icon: <AiTwotoneFolderOpen />,
+    icon: <FolderOpen />,
   },
 ]
 
@@ -35,7 +48,7 @@ const footerMenu = [
   {
     href: '/gestioneProfilo',
     title: 'Impostazioni',
-    icon: <IoSettingsSharp />,
+    icon: <SettingsSuggest />,
   },
 ]
 
@@ -75,19 +88,7 @@ const SideBarComponent: React.FunctionComponent<sideBarProp> = ({ open }) => {
                     px: 2.5,
                   }}
                 >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <IconContext.Provider
-                      value={{ color: 'rgba(0, 0, 0, 0.87)' }}
-                    >
-                      {menuItem.icon}
-                    </IconContext.Provider>
-                  </ListItemIcon>
+                  <ListIcon isOpen={open}>{menuItem.icon}</ListIcon>
                   <ListItemText
                     primary={menuItem.title}
                     sx={{ opacity: open ? 1 : 0 }}
@@ -125,11 +126,7 @@ const SideBarComponent: React.FunctionComponent<sideBarProp> = ({ open }) => {
                       justifyContent: 'center',
                     }}
                   >
-                    <IconContext.Provider
-                      value={{ color: 'rgba(0, 0, 0, 0.87)' }}
-                    >
-                      {menuItem.icon}
-                    </IconContext.Provider>
+                    {menuItem.icon}
                   </ListItemIcon>
                   <ListItemText
                     primary={menuItem.title}
