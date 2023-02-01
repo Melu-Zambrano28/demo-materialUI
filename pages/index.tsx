@@ -1,8 +1,8 @@
 import styles from '@/styles/Home.module.css'
 import { AppLayoutComponent } from '@/components/AppLayout/AppLayoutComponent'
-import { createTheme, ThemeProvider } from '@mui/material'
+import { createTheme, PaletteMode, ThemeProvider } from '@mui/material'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 const dark_mode_theme = {
   palette: {
@@ -34,20 +34,29 @@ const light_mode_theme = {
   },
 }
 
-export default function Home() {
-  const [isDarkTheme, setIsDarkTheme] = useState(false)
+const getDesignTokens = (mode: PaletteMode) => ({
+  palette: {
+    mode,
+    ...(mode === 'light' ? light_mode_theme : dark_mode_theme),
+  },
+})
 
-  const changeTheme = () => {
-    setIsDarkTheme(!isDarkTheme)
-  }
+export default function Home() {
+  const [mode, setMode] = useState<PaletteMode>('light')
+  const colorMode = useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode: PaletteMode) =>
+          prevMode === 'light' ? 'dark' : 'light',
+        )
+      },
+    }),
+    [],
+  )
+
+  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode])
   return (
-    <ThemeProvider
-      theme={
-        isDarkTheme
-          ? createTheme(dark_mode_theme)
-          : createTheme(light_mode_theme)
-      }
-    >
+    <ThemeProvider theme={theme}>
       <AppLayoutComponent>Home</AppLayoutComponent>
     </ThemeProvider>
   )

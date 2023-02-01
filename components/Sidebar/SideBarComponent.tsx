@@ -16,9 +16,7 @@ import {
   styled,
   useTheme,
 } from '@mui/material'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React from 'react'
 import { SideBarItem } from './SideBarItem'
 
 type ExtraProps = {

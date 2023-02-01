@@ -21,11 +21,11 @@ const SideBarItem: React.FunctionComponent<SideBarItemProp> = ({
   open,
 }) => {
   const router = useRouter()
-  const isTheSamePage = href === router.pathname
+  const isTheSamePage = router.pathname === href
 
   return (
-    <ListItem disablePadding sx={{ display: 'block' }}>
-      <Link href={href} style={{ textDecoration: 'none' }}>
+    <Link href={href} style={{ textDecoration: 'none' }}>
+      <ListItem disablePadding sx={{ display: 'block' }}>
         <ListItemButton
           selected={isTheSamePage}
           sx={{
@@ -49,8 +49,8 @@ const SideBarItem: React.FunctionComponent<SideBarItemProp> = ({
             style={{ color: 'rgba(0, 0, 0, 0.87)' }}
           />
         </ListItemButton>
-      </Link>
-    </ListItem>
+      </ListItem>
+    </Link>
   )
 }
 
