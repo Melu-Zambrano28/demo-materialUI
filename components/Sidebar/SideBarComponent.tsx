@@ -1,9 +1,9 @@
-// import {
-//   BusinessCenter,
-//   EventNote,
-//   FolderOpen,
-//   SettingsSuggest,
-// } from '@mui/icons-material'
+import {
+  BusinessCenter,
+  EventNote,
+  FolderOpen,
+  SettingsSuggest,
+} from '@mui/icons-material'
 import { Box, Divider, Grid, List, ListItemIcon, styled } from '@mui/material'
 import React from 'react'
 import { SideBarItem } from './SideBarItem'
@@ -20,26 +20,26 @@ const ListIcon = styled(ListItemIcon)<ExtraProps>(({ isOpen, theme }) => ({
 }))
 
 const menu = [
-  { href: '/prodotti', title: 'Prodotti', icon: <div>BUSINESS</div> },
+  { href: '/prodotti', title: 'Prodotti', icon: <BusinessCenter /> },
   {
     href: '/agenda',
     title: 'Agenda',
-    icon: <div>EVENT NOTE</div>,
+    icon: <EventNote />,
   },
   {
     href: '/documentazione',
     title: 'Documentazione',
-    icon: <div>FOLDER OPEN</div>,
+    icon: <FolderOpen />,
   },
 ]
 
-// const footerMenu = [
-//   {
-//     href: '/gestioneProfilo',
-//     title: 'Impostazioni',
-//     icon: <SettingsSuggest />,
-//   },
-// ]
+const footerMenu = [
+  {
+    href: '/gestioneProfilo',
+    title: 'Impostazioni',
+    icon: <SettingsSuggest />,
+  },
+]
 
 type sideBarProp = {
   open: boolean
