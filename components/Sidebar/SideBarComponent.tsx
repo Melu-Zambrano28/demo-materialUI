@@ -1,21 +1,10 @@
-import {
-  BusinessCenter,
-  EventNote,
-  FolderOpen,
-  SettingsSuggest,
-} from '@mui/icons-material'
-import {
-  Box,
-  Divider,
-  Grid,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  styled,
-  useTheme,
-} from '@mui/material'
+// import {
+//   BusinessCenter,
+//   EventNote,
+//   FolderOpen,
+//   SettingsSuggest,
+// } from '@mui/icons-material'
+import { Box, Divider, Grid, List, ListItemIcon, styled } from '@mui/material'
 import React from 'react'
 import { SideBarItem } from './SideBarItem'
 
@@ -31,26 +20,26 @@ const ListIcon = styled(ListItemIcon)<ExtraProps>(({ isOpen, theme }) => ({
 }))
 
 const menu = [
-  { href: '/prodotti', title: 'Prodotti', icon: <BusinessCenter /> },
+  { href: '/prodotti', title: 'Prodotti', icon: <div>BUSINESS</div> },
   {
     href: '/agenda',
     title: 'Agenda',
-    icon: <EventNote />,
+    icon: <div>EVENT NOTE</div>,
   },
   {
     href: '/documentazione',
     title: 'Documentazione',
-    icon: <FolderOpen />,
+    icon: <div>FOLDER OPEN</div>,
   },
 ]
 
-const footerMenu = [
-  {
-    href: '/gestioneProfilo',
-    title: 'Impostazioni',
-    icon: <SettingsSuggest />,
-  },
-]
+// const footerMenu = [
+//   {
+//     href: '/gestioneProfilo',
+//     title: 'Impostazioni',
+//     icon: <SettingsSuggest />,
+//   },
+// ]
 
 type sideBarProp = {
   open: boolean
@@ -72,7 +61,7 @@ const SideBarComponent: React.FunctionComponent<sideBarProp> = ({ open }) => {
           ))}
         </List>
       </Box>
-      <Divider />
+      {/* <Divider />
       <Box style={{ marginTop: '1rem' }}>
         <List>
           {footerMenu.map((menuItem, index) => (
@@ -85,7 +74,7 @@ const SideBarComponent: React.FunctionComponent<sideBarProp> = ({ open }) => {
             />
           ))}
         </List>
-      </Box>
+      </Box> */}
     </Grid>
   )
 }

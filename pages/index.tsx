@@ -1,4 +1,3 @@
-import styles from '@/styles/Home.module.css'
 import { AppLayoutComponent } from '@/components/AppLayout/AppLayoutComponent'
 import { createTheme, PaletteMode, ThemeProvider } from '@mui/material'
 
