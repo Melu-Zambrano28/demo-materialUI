@@ -59,19 +59,6 @@ type sideBarProp = {
 }
 
 const SideBarComponent: React.FunctionComponent<sideBarProp> = ({ open }) => {
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  const [menuIndex, setMenuIndex] = useState(0)
-
-  const router = useRouter()
-
-  const handleListItemClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number,
-  ) => {
-    setSelectedIndex(index)
-    setMenuIndex(index)
-  }
-
   return (
     <Grid container direction="column">
       <Box>
@@ -81,10 +68,8 @@ const SideBarComponent: React.FunctionComponent<sideBarProp> = ({ open }) => {
               key={`sideBarItem${index}`}
               href={menuItem.href}
               title={menuItem.title}
-              selected={menuItem.href === router.pathname}
               icon={menuItem.icon}
               open={open}
-              onClick={(event) => handleListItemClick(event, menuIndex)}
             />
           ))}
         </List>
@@ -97,10 +82,8 @@ const SideBarComponent: React.FunctionComponent<sideBarProp> = ({ open }) => {
               key={`sideBarItem${index}`}
               href={menuItem.href}
               title={menuItem.title}
-              selected={menuItem.href === router.pathname}
               icon={menuItem.icon}
               open={open}
-              onClick={(event) => handleListItemClick(event, menuIndex)}
             />
           ))}
         </List>

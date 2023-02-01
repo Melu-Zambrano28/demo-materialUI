@@ -5,13 +5,12 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material'
+import { useRouter } from 'next/router'
 
 type SideBarItemProp = {
   href: string
   title: string
   icon?: JSX.Element
-  onClick?: React.MouseEventHandler<HTMLDivElement> | undefined
-  selected: boolean
   open: boolean
 }
 
@@ -19,16 +18,16 @@ const SideBarItem: React.FunctionComponent<SideBarItemProp> = ({
   href,
   title,
   icon,
-  selected,
-  onClick,
   open,
 }) => {
+  const router = useRouter()
+  const isTheSamePage = href === router.pathname
+
   return (
     <ListItem disablePadding sx={{ display: 'block' }}>
       <Link href={href} style={{ textDecoration: 'none' }}>
         <ListItemButton
-          selected={selected}
-          onClick={onClick}
+          selected={isTheSamePage}
           sx={{
             minHeight: 48,
             justifyContent: open ? 'initial' : 'center',
