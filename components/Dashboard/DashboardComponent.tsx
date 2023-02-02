@@ -1,4 +1,4 @@
-import { AppLayoutComponent } from '../AppLayout/AppLayoutComponent'
+import { AppLayoutComponent } from '@/components/AppLayout'
 
 const DashboardComponent = () => {
   return (

@@ -1,4 +1,4 @@
-import { AppLayoutComponent } from '@/components/AppLayout/AppLayoutComponent'
+import { AppLayoutComponent } from '@/components/AppLayout'
 import { NextPage } from 'next'
 
 const ProdottiPage: NextPage = () => {
