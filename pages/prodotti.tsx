@@ -1,11 +1,11 @@
-import { AppLayoutComponent } from '@/components/AppLayout'
+import { AppLayout } from '@/components/AppLayout'
 import { NextPage } from 'next'
 
 const ProdottiPage: NextPage = () => {
   return (
-    <AppLayoutComponent>
+    <AppLayout>
       <div>ciao da Prodotti</div>
-    </AppLayoutComponent>
+    </AppLayout>
   )
 }
 

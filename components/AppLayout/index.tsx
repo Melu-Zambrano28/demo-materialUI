@@ -10,9 +10,7 @@ import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArro
 import MenuIcon from '@mui/icons-material/Menu'
 import { AppBar, Drawer, DrawerHeader } from './AppLayoutStyles'
 
-const AppLayoutComponent: React.FC<React.PropsWithChildren<{}>> = ({
-  children,
-}) => {
+const AppLayout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const theme = useTheme()
   const [open, setOpen] = React.useState(true)
 
@@ -25,7 +23,7 @@ const AppLayoutComponent: React.FC<React.PropsWithChildren<{}>> = ({
   }
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar position="fixed" open={open}>
+      <AppBar open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -46,7 +44,10 @@ const AppLayoutComponent: React.FC<React.PropsWithChildren<{}>> = ({
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton
+            onClick={handleDrawerClose}
+            sx={{ color: theme.palette.secondary.main }}
+          >
             {theme.direction === 'rtl' ? (
               <KeyboardDoubleArrowRightIcon />
             ) : (
@@ -64,4 +65,4 @@ const AppLayoutComponent: React.FC<React.PropsWithChildren<{}>> = ({
   )
 }
 
-export { AppLayoutComponent }
+export { AppLayout }

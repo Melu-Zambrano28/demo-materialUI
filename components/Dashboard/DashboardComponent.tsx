@@ -1,10 +1,10 @@
-import { AppLayoutComponent } from '@/components/AppLayout'
+import { AppLayout } from '@/components/AppLayout'
 
 const DashboardComponent = () => {
   return (
-    <AppLayoutComponent>
+    <AppLayout>
       <div>ciao sono Dashborar</div>
-    </AppLayoutComponent>
+    </AppLayout>
   )
 }
 

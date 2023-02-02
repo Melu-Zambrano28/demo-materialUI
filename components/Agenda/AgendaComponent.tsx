@@ -1,10 +1,10 @@
-import { AppLayoutComponent } from '../AppLayout'
+import { AppLayout } from '@/components/AppLayout'
 
 const AgendaComponent = () => {
   return (
-    <AppLayoutComponent>
+    <AppLayout>
       <div>ciao sono Agenda</div>
-    </AppLayoutComponent>
+    </AppLayout>
   )
 }
 

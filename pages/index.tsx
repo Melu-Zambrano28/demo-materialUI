@@ -1,5 +1,5 @@
-import { AppLayoutComponent } from '@/components/AppLayout'
+import { AppLayout } from '@/components/AppLayout'
 
 export default function Home() {
-  return <AppLayoutComponent>Home</AppLayoutComponent>
+  return <AppLayout>Home</AppLayout>
 }
