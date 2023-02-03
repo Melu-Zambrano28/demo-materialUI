@@ -5,7 +5,7 @@ import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest'
 import DashboardIcon from '@mui/icons-material/Dashboard'
 import { Box, Divider, Grid, List } from '@mui/material'
 import React from 'react'
-import { SideBarItem } from './SideBarItem'
+import { SideBarElement } from '@/components/SideBarElement'
 
 const menu = [
   { href: '/', title: 'Dashboard', icon: <DashboardIcon /> },
@@ -40,7 +40,7 @@ const SideBarComponent: React.FunctionComponent<SideBarProp> = ({ open }) => {
       <Box>
         <List>
           {menu.map((menuItem, index) => (
-            <SideBarItem
+            <SideBarElement
               key={`sideBarItem${index}`}
               href={menuItem.href}
               title={menuItem.title}
@@ -54,7 +54,7 @@ const SideBarComponent: React.FunctionComponent<SideBarProp> = ({ open }) => {
       <Box style={{ marginTop: '1rem' }}>
         <List>
           {footerMenu.map((menuItem, index) => (
-            <SideBarItem
+            <SideBarElement
               key={`sideBarItem${index}`}
               href={menuItem.href}
               title={menuItem.title}

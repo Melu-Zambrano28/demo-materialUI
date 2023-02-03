@@ -1,6 +1,7 @@
 import { styled, Theme, CSSObject } from '@mui/material/styles'
 import MuiDrawer from '@mui/material/Drawer'
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
+import IconButton from '@mui/material/IconButton'
 
 const drawerWidth = 240
 
@@ -74,3 +75,10 @@ export const Drawer = styled(MuiDrawer, {
     '& .MuiDrawer-paper': closedMixin(theme),
   }),
 }))
+
+export const IconButtonMenu = styled(IconButton)<{ open: boolean }>(
+  ({ theme, open }) => ({
+    marginRight: 5,
+    ...(open && { display: 'none' }),
+  }),
+)

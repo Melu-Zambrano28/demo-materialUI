@@ -15,14 +15,14 @@ export const theme = createTheme({
     mode: 'light',
     primary: {
       main: '#6043b1',
-      contrastText: '#eae7e7',
-      dark: '#180c2b',
-      light: '#dfd9f7',
+      contrastText: '#FFFFFF',
+      dark: 'rgb(67, 46, 123)',
+      light: 'rgb(127, 104, 192)',
     },
     secondary: {
-      main: '#9c27b0',
-      light: '#AF52BF',
-      dark: '#6D1B7B',
+      main: '#9C27B0',
+      light: 'rgb(175, 82, 191)',
+      dark: 'rgb(109, 27, 123)',
       contrastText: '#FFFFFF',
     },
     error: {

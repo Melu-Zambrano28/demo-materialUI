@@ -4,11 +4,11 @@ import { useTheme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
-import IconButton from '@mui/material/IconButton'
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft'
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight'
 import MenuIcon from '@mui/icons-material/Menu'
-import { AppBar, Drawer, DrawerHeader } from './AppLayoutStyles'
+import { AppBar, Drawer, DrawerHeader, IconButtonMenu } from './AppLayoutStyles'
+import IconButton from '@mui/material/IconButton'
 
 const AppLayout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const theme = useTheme()
@@ -25,18 +25,15 @@ const AppLayout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
     <Box sx={{ display: 'flex' }}>
       <AppBar open={open}>
         <Toolbar>
-          <IconButton
+          <IconButtonMenu
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={{
-              marginRight: 5,
-              ...(open && { display: 'none' }),
-            }}
+            open={open}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButtonMenu>
           <Typography variant="h6" noWrap component="div">
             Mini variant drawer
           </Typography>
@@ -46,7 +43,7 @@ const AppLayout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
         <DrawerHeader>
           <IconButton
             onClick={handleDrawerClose}
-            sx={{ color: theme.palette.secondary.main }}
+            sx={{ color: theme.palette.primary.main }}
           >
             {theme.direction === 'rtl' ? (
               <KeyboardDoubleArrowRightIcon />
