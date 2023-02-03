@@ -3,9 +3,16 @@ import EventNoteIcon from '@mui/icons-material/EventNote'
 import FolderOpenIcon from '@mui/icons-material/FolderOpen'
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest'
 import DashboardIcon from '@mui/icons-material/Dashboard'
-import { Box, Divider, Grid, List } from '@mui/material'
-import React from 'react'
+import { Box, Collapse, Divider, Grid, List } from '@mui/material'
+import React, { useState } from 'react'
 import { SideBarElement } from '@/components/SideBarElement'
+import { ListElementIcon, ListElementText } from './SideBarStyles'
+import ExpandLess from '@mui/icons-material/ExpandLess'
+import ExpandMore from '@mui/icons-material/ExpandMore'
+import {
+  ListElement,
+  ListElementButton,
+} from '../SideBarElement/SideBarElementStyles'
 
 const menu = [
   { href: '/', title: 'Dashboard', icon: <DashboardIcon /> },
@@ -35,6 +42,8 @@ type SideBarProp = {
 }
 
 const SideBarComponent: React.FunctionComponent<SideBarProp> = ({ open }) => {
+  const [openConfigMenu, setOpenConfigMenu] = useState(false)
+
   return (
     <Grid container direction="column">
       <Box>
@@ -43,10 +52,11 @@ const SideBarComponent: React.FunctionComponent<SideBarProp> = ({ open }) => {
             <SideBarElement
               key={`sideBarItem${index}`}
               href={menuItem.href}
-              title={menuItem.title}
-              icon={menuItem.icon}
               open={open}
-            />
+            >
+              <ListElementIcon open={open}>{menuItem.icon}</ListElementIcon>
+              <ListElementText primary={menuItem.title} open={open} />
+            </SideBarElement>
           ))}
         </List>
       </Box>
@@ -54,14 +64,32 @@ const SideBarComponent: React.FunctionComponent<SideBarProp> = ({ open }) => {
       <Box style={{ marginTop: '1rem' }}>
         <List>
           {footerMenu.map((menuItem, index) => (
-            <SideBarElement
-              key={`sideBarItem${index}`}
-              href={menuItem.href}
-              title={menuItem.title}
-              icon={menuItem.icon}
-              open={open}
-            />
+            <ListElement disablePadding>
+              <ListElementButton open={open}>
+                <ListElementIcon open={open}>{menuItem.icon}</ListElementIcon>
+                <ListElementText primary={menuItem.title} open={open} />
+                {openConfigMenu ? (
+                  <ExpandLess onClick={() => setOpenConfigMenu(false)} />
+                ) : (
+                  <ExpandMore onClick={() => setOpenConfigMenu(true)} />
+                )}
+              </ListElementButton>
+            </ListElement>
           ))}
+          <Collapse in={openConfigMenu} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              {footerMenu.map((menuItem, index) => (
+                <SideBarElement
+                  key={`sideBarItem${index}`}
+                  href={menuItem.href}
+                  open={open}
+                >
+                  <ListElementIcon open={open}>{menuItem.icon}</ListElementIcon>
+                  <ListElementText primary={menuItem.title} open={open} />
+                </SideBarElement>
+              ))}
+            </List>
+          </Collapse>
         </List>
       </Box>
     </Grid>
