@@ -1,18 +1,15 @@
+import React, { useState } from 'react'
+import { Box, Collapse, Divider, Grid, List } from '@mui/material'
+import { SideBarElement, SideBarLinkElement } from '@/components/SideBarElement'
+import { ListElementIcon, ListElementText } from './SideBarStyles'
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter'
 import EventNoteIcon from '@mui/icons-material/EventNote'
 import FolderOpenIcon from '@mui/icons-material/FolderOpen'
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest'
 import DashboardIcon from '@mui/icons-material/Dashboard'
-import { Box, Collapse, Divider, Grid, List } from '@mui/material'
-import React, { useState } from 'react'
-import { SideBarElement } from '@/components/SideBarElement'
-import { ListElementIcon, ListElementText } from './SideBarStyles'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
-import {
-  ListElement,
-  ListElementButton,
-} from '../SideBarElement/SideBarElementStyles'
+import LockResetIcon from '@mui/icons-material/LockReset'
 
 const menu = [
   { href: '/', title: 'Dashboard', icon: <DashboardIcon /> },
@@ -34,6 +31,13 @@ const footerMenu = [
     href: '/gestioneProfilo',
     title: 'Impostazioni',
     icon: <SettingsSuggestIcon />,
+    subItems: [
+      {
+        href: '/cambioPassword',
+        title: 'Cambio Password',
+        icon: <LockResetIcon />,
+      },
+    ],
   },
 ]
 
@@ -49,14 +53,14 @@ const SideBarComponent: React.FunctionComponent<SideBarProp> = ({ open }) => {
       <Box>
         <List>
           {menu.map((menuItem, index) => (
-            <SideBarElement
+            <SideBarLinkElement
               key={`sideBarItem${index}`}
               href={menuItem.href}
               open={open}
             >
               <ListElementIcon open={open}>{menuItem.icon}</ListElementIcon>
               <ListElementText primary={menuItem.title} open={open} />
-            </SideBarElement>
+            </SideBarLinkElement>
           ))}
         </List>
       </Box>
@@ -64,8 +68,12 @@ const SideBarComponent: React.FunctionComponent<SideBarProp> = ({ open }) => {
       <Box style={{ marginTop: '1rem' }}>
         <List>
           {footerMenu.map((menuItem, index) => (
-            <ListElement disablePadding>
-              <ListElementButton open={open}>
+            <Box key={`footerMenuBox${index}`}>
+              <SideBarElement
+                key={`sideBarItem${index}`}
+                href={menuItem.href}
+                open={open}
+              >
                 <ListElementIcon open={open}>{menuItem.icon}</ListElementIcon>
                 <ListElementText primary={menuItem.title} open={open} />
                 {openConfigMenu ? (
@@ -73,23 +81,30 @@ const SideBarComponent: React.FunctionComponent<SideBarProp> = ({ open }) => {
                 ) : (
                   <ExpandMore onClick={() => setOpenConfigMenu(true)} />
                 )}
-              </ListElementButton>
-            </ListElement>
-          ))}
-          <Collapse in={openConfigMenu} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              {footerMenu.map((menuItem, index) => (
-                <SideBarElement
-                  key={`sideBarItem${index}`}
-                  href={menuItem.href}
-                  open={open}
+              </SideBarElement>
+              {menuItem.subItems.map((subitem, indexSubItem) => (
+                <Collapse
+                  key={`collapseSubItems${indexSubItem}`}
+                  in={openConfigMenu}
+                  timeout="auto"
+                  unmountOnExit
                 >
-                  <ListElementIcon open={open}>{menuItem.icon}</ListElementIcon>
-                  <ListElementText primary={menuItem.title} open={open} />
-                </SideBarElement>
+                  <List component="div" disablePadding>
+                    <SideBarLinkElement
+                      key={`sideBarSubItem${indexSubItem}`}
+                      href={subitem.href}
+                      open={open}
+                    >
+                      <ListElementIcon open={open}>
+                        {subitem.icon}
+                      </ListElementIcon>
+                      <ListElementText primary={subitem.title} open={open} />
+                    </SideBarLinkElement>
+                  </List>
+                </Collapse>
               ))}
-            </List>
-          </Collapse>
+            </Box>
+          ))}
         </List>
       </Box>
     </Grid>
