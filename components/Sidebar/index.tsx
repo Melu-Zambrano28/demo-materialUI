@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Collapse, Divider, Grid, List } from '@mui/material'
+import { Avatar, Box, Collapse, Divider, Grid, List } from '@mui/material'
 import { SideBarElement, SideBarLinkElement } from '@/components/SideBarElement'
 import { ListElementIcon, ListElementText } from './SideBarStyles'
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter'
@@ -58,7 +58,12 @@ const SideBarComponent: React.FunctionComponent<SideBarProp> = ({ open }) => {
               href={menuItem.href}
               open={open}
             >
-              <ListElementIcon open={open}>{menuItem.icon}</ListElementIcon>
+              <ListElementIcon
+                open={open}
+                title={`${!open ? menuItem.title : ''}`}
+              >
+                {menuItem.icon}
+              </ListElementIcon>
               <ListElementText primary={menuItem.title} open={open} />
             </SideBarLinkElement>
           ))}
@@ -74,7 +79,12 @@ const SideBarComponent: React.FunctionComponent<SideBarProp> = ({ open }) => {
                 href={menuItem.href}
                 open={open}
               >
-                <ListElementIcon open={open}>{menuItem.icon}</ListElementIcon>
+                <ListElementIcon
+                  open={open}
+                  title={`${!open ? menuItem.title : ''}`}
+                >
+                  {menuItem.icon}
+                </ListElementIcon>
                 <ListElementText primary={menuItem.title} open={open} />
                 {openConfigMenu ? (
                   <ExpandLess onClick={() => setOpenConfigMenu(false)} />
@@ -85,7 +95,7 @@ const SideBarComponent: React.FunctionComponent<SideBarProp> = ({ open }) => {
               {menuItem.subItems.map((subitem, indexSubItem) => (
                 <Collapse
                   key={`collapseSubItems${indexSubItem}`}
-                  in={openConfigMenu}
+                  in={open ? openConfigMenu : true}
                   timeout="auto"
                   unmountOnExit
                 >
@@ -95,7 +105,10 @@ const SideBarComponent: React.FunctionComponent<SideBarProp> = ({ open }) => {
                       href={subitem.href}
                       open={open}
                     >
-                      <ListElementIcon open={open}>
+                      <ListElementIcon
+                        open={open}
+                        title={`${!open ? subitem.title : ''}`}
+                      >
                         {subitem.icon}
                       </ListElementIcon>
                       <ListElementText primary={subitem.title} open={open} />
