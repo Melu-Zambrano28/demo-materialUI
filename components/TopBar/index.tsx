@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Toolbar from '@mui/material/Toolbar'
 import MenuIcon from '@mui/icons-material/Menu'
 import Badge from '@mui/material/Badge'
@@ -6,7 +7,10 @@ import NotificationsIcon from '@mui/icons-material/Notifications'
 import MoreIcon from '@mui/icons-material/More'
 import { Avatar, Box, IconButton } from '@mui/material'
 import { AppBar, IconButtonMenu } from '@/components/AppLayout/AppLayoutStyles'
-import purple from '@mui/material/colors/purple'
+import { purple } from '@mui/material/colors'
+import { MenuMobileTopBar } from './Menu'
+import LogoutIcon from '@mui/icons-material/Logout'
+import { ContainerMenuMobile } from './TopBarStyles'
 
 type TopBarProp = {
   open: boolean
@@ -16,6 +20,19 @@ type TopBarProp = {
 const violet = purple[200]
 
 const TopBarComponent: React.FC<TopBarProp> = ({ open, drawerOpen }) => {
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
+    useState<null | HTMLElement>(null)
+
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
+
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null)
+  }
+
+  const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setMobileMoreAnchorEl(event.currentTarget)
+  }
+
   return (
     <AppBar open={open}>
       <Toolbar>
@@ -30,6 +47,16 @@ const TopBarComponent: React.FC<TopBarProp> = ({ open, drawerOpen }) => {
         </IconButtonMenu>
         <Box sx={{ flexGrow: 1 }} />
         <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <IconButton
+            size="large"
+            edge="end"
+            aria-label="account of current user"
+            aria-controls={`tob-bar-menu`}
+            aria-haspopup="true"
+            color="inherit"
+          >
+            <Avatar sx={{ bgcolor: violet }}>{`MZ`}</Avatar>
+          </IconButton>
           <IconButton
             size="large"
             aria-label="show 4 new mails"
@@ -51,27 +78,33 @@ const TopBarComponent: React.FC<TopBarProp> = ({ open, drawerOpen }) => {
           <IconButton
             size="large"
             edge="end"
-            aria-label="account of current user"
-            // aria-controls={menuId}
+            aria-label="logout"
+            aria-controls={`tob-bar-menu`}
             aria-haspopup="true"
-            //   onClick={handleProfileMenuOpen}
             color="inherit"
           >
-            <Avatar sx={{ bgcolor: violet }}>{`MZ`}</Avatar>
+            <LogoutIcon />
           </IconButton>
         </Box>
-        <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+        <ContainerMenuMobile>
           <IconButton
             size="large"
             aria-label="show more"
-            //aria-controls={mobileMenuId}
+            aria-controls={`tob-bar-menu-mobile`}
             aria-haspopup="true"
-            //onClick={handleMobileMenuOpen}
+            onClick={handleMobileMenuOpen}
             color="inherit"
           >
             <MoreIcon />
           </IconButton>
-        </Box>
+
+          <MenuMobileTopBar
+            idMenu={`tob-bar-menu-mobile`}
+            anchorEl={mobileMoreAnchorEl}
+            isMenuOpen={isMobileMenuOpen}
+            handleMenuClose={handleMobileMenuClose}
+          />
+        </ContainerMenuMobile>
       </Toolbar>
     </AppBar>
   )
